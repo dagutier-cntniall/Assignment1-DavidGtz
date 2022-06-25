@@ -1,8 +1,28 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+
+//auth
+let session = require('express-session');
+let passport = require('passport');
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+
+//DB Access
+let mongoose = require('mongoose');
+let DB = require('./config/db');
+
+mongoose.connect(process.env.URI || DB.URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+let mongoDB = mongoose.connection;
+mongoDB.on('error', console.error.bind(console, 'Connect Failed:'));
+mongoDB.once('open', () =>{
+  console.log('Connected to MongoDB... ok');
+});
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,6 +39,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
+
+//session with express
+app.use(session({
+  secret: "s3cur3s0c",
+  saveUninitialized: false,
+  resave: false
+}));
+
+//app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+let userModel = require('./models/user');
+let User = userModel.User;
+
+passport.use(User.createStrategy());
+
+//serialize and deserialize 
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
