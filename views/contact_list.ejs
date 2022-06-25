@@ -6,40 +6,7 @@
     <link rel='stylesheet' href="/@fortawesome/fontawesome-free/css/all.min.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-light bg-opacity-90">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="/images/logoDG.jpg" alt="" width="80" height="80"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/aboutme">About me</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/projects" >Projects</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/services" >Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/contact" >Contact</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/contact_list" >Reference Contacts</a>
-              </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-    </nav>
+    <%- include ./partials/main_nav.ejs %>
     
     <div class="shadow-1-strong bg-white my-5" id="intro">
       <div class="bg-info text-white">
@@ -49,8 +16,8 @@
               <div class="avatar p-1"><img class="img-thumbnail shadow-2-strong" src="images/logoDG.jpg" width="160" height="160"/></div>
               <div class="header-bio mt-3">
                 <div data-aos="zoom-in" data-aos-delay="0">
-                  <h2 class="h1">David Gutierrez</h2>
-                  <p>Cybersecurity Professional/Software Technology Student</p>
+                  <h2 class="h1">Business Contact List</h2>
+                  <p>Please contact only if absolutely necessary</p>
                 </div>
                 <div class="header-social mb-3 d-print-none" data-aos="zoom-in" data-aos-delay="200">
                   <nav role="navigation">

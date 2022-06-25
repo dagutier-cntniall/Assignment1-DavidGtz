@@ -2,6 +2,7 @@ let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 let passport = require('passport');
+let flash = require('connect-flash');
 
 let userModel = require('../models/user');
 let User = userModel.User;
@@ -41,7 +42,7 @@ router.get('/contact', function(req, res, next) {
 
 /* GET contact_list page. */
 router.get('/contact_list', requireAuth, function(req, res, next) {
-  res.render('contact', { title: 'Contact Information' });
+  res.render('contact_list', { title: 'Contact Information' });
 });
 
 /* GET login page. */
@@ -54,7 +55,7 @@ router.get('/login', function(req, res, next) {
     }
   }
   else{
-    return res.redirect('/');
+    return res.redirect('/contact_list');
     }
 });
 

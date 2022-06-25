@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href="/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel='stylesheet' href="/@fortawesome/fontawesome-free/css/all.min.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light bg-opacity-90">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="/images/logoDG.jpg" alt="" width="80" height="80"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/aboutme">About me</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/projects" >Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/services" >Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact" >Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact_list" >Reference Contacts</a>
+            </li>
+          </ul>
+          
+        </div>
+        <% if(typeof displayName == 'string' && displayName) { %>
+          <li class="navbar-text"><i class="fas fa-lg fa-user"></i> Welcome, <%= displayName %></li>
+          <li class="nav-item"><a href="/logout" class="nav-link">
+            <i class="fas fa-lg fa-sign-out-alt"></i> Logout</a></li>
+        <% } else { %>
+          <li class="nav-item"><a href="/login" class="nav-link">
+            <i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
+        <% } %>
+
+      </div>
+    </nav>
