@@ -9,6 +9,7 @@ let session = require('express-session');
 let passport = require('passport');
 let passportLocal = require('passport-local');
 let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
 
 //DB Access
 let mongoose = require('mongoose');
@@ -47,7 +48,7 @@ app.use(session({
   resave: false
 }));
 
-//app.use(flash());
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
