@@ -6,6 +6,7 @@ let flash = require('connect-flash');
 
 let userModel = require('../models/user');
 let User = userModel.User;
+let Bcontact = require('../models/bcontact');
 
 //Helper function to require auth to some content
 function requireAuth(req, res, next){
@@ -42,7 +43,50 @@ router.get('/contact', function(req, res, next) {
 
 /* GET contact_list page. */
 router.get('/contact_list', requireAuth, function(req, res, next) {
-  res.render('contact_list', { title: 'Contact Information' });
+  Bcontact.find ((err, bcontactList) => {
+    if(err){
+      return console.error(err);
+    }
+    else{
+      res.render('contact_list', { 
+        title: 'Contact Information',
+        BcontactList : bcontactList,
+        displayName: req.user ? req.user.displayName : ''});
+    }
+  });
+});
+
+/* GET edit page. */
+router.get('/edit/:id', (req, res, next) => {
+  let id = req.params.id;
+  Bcontact.findById(id, (err, bcontactToEdit) =>{
+    if(err){
+      console.log(err);
+      res.end(err);
+    }
+    else{
+      res.render('editpage', {title: 'Edit this contact', bcontact: bcontactToEdit });
+    }
+  });
+});
+
+/* POST edit page. */
+router.post('/edit/:id', function(req, res, next) {
+  let id = req.params.id;
+  let updatedBcontact = Bcontact({
+    "_id":id,
+    "name": req.body.name,
+    "email": req.body.email,
+  });
+  Bcontact.updateOne({_id:id}, updatedBcontact, (err) => {
+    if(err){
+      console.log(err);
+      res.end(err);
+    }
+    else{
+      res.redirect('/contact_list');
+    }
+  });
 });
 
 /* GET login page. */
@@ -63,7 +107,7 @@ router.get('/login', function(req, res, next) {
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', (err, user, info) =>{
     if(err){
-      return next(err)
+      return next(err);
     }
     if(!user){
       req.flash('loginMessage', 'Authentication Error');

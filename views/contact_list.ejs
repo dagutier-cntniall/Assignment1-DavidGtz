@@ -10,30 +10,55 @@
     
     <div class="shadow-1-strong bg-white my-5" id="intro">
       <div class="bg-info text-white">
-        <div class="cover bg-image"><img src="images/header-background.jpg"/>
-          <div class="mask" style="background-color: rgba(18, 17, 82, 0.838);backdrop-filter: blur(2px);">
+          <div class="mask" style="background-color: rgb(101, 101, 104);backdrop-filter: blur(2px);">
             <div class="text-center p-5">
-              <div class="avatar p-1"><img class="img-thumbnail shadow-2-strong" src="images/logoDG.jpg" width="160" height="160"/></div>
+              <div class="avatar p-1"><img class="img-thumbnail shadow-2-strong" src="images/logoDG.jpg" width="40" height="40"/></div>
               <div class="header-bio mt-3">
                 <div data-aos="zoom-in" data-aos-delay="0">
                   <h2 class="h1">Business Contact List</h2>
                   <p>Please contact only if absolutely necessary</p>
                 </div>
+              <div class="table-responsive">
                 <div class="header-social mb-3 d-print-none" data-aos="zoom-in" data-aos-delay="200">
                   <nav role="navigation">
                     <ul class="nav justify-content-center">
-                      <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/dagutierrez" title="LinkedIn"><i class="fab fa-linkedin"></i><span class="menu-title sr-only">LinkedIn</span></a>
-                      </li>
-                      <li class="nav-item"><a class="nav-link" href="https://github.com/dagutier-cntniall" title="Github"><i class="fab fa-github"></i><span class="menu-title sr-only">Github</span></a>
-                      </li>
-                      <li class="nav-item"><a class="bi bi-envelope" title="Gmail"><i class="fab fa-gmail"></i><span class="menu-title sr-only">Gmail</span></a>
-                      </li>
+                      <table class="table table-bordered table-striped table-hover">
+                        <!-- Header Row-->
+                        <tr class="d-flex">
+                            <% if(typeof displayName == 'string' && displayName) { %>
+                                <th class="text-center col-2">Name</th>
+                                <th class="text-center col-2">Email</th>
+                                <th class="text-center col-1"></th>                             
+                            <% } else { %>
+                                <th class="text-center col-2">Name</th>
+                                <th class="text-center col-2">Email</th>
+                            <% } %>
+                        </tr>
+        
+                        <!-- Repeatable Template Row -->
+        
+                        <% for(let count = 0; count < BcontactList.length; count++) { %>
+                            <tr class="d-flex">
+                                <% if(typeof displayName == 'string' && displayName) { %>
+                                    <td class="text-center col-2"><%= BcontactList[count].name %></td>
+                                    <td class="text-center col-2"><%= BcontactList[count].email %></td>
+                                    <td class="text-center col-1">
+                                        <a href="/edit/<%= BcontactList[count]._id %>" class="btn btn-primary btn-sm">
+                                        Edit</a>
+                                    </td>
+                                 <% } else { %>
+                                    <td class="text-center col-2"><%= BcontactList[count].name %></td>
+                                    <td class="text-center col-2"><%= BcontactList[count].email %></td>
+                                 <% } %>
+                            </tr>
+                        <% } %>
+                    </table>
                     </ul>
                   </nav>
                 </div>
+              </div>
             </div>
           </div>
-        </div>
       </div>
 
     <script src="/jquery/dist/jquery.min.js"></script>
