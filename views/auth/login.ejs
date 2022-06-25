@@ -1,9 +1,10 @@
 <main class="container">
-<% if(messages.length >0){ %>
-    <div class="alert alert-danger">
-        <%=messages %>
-    </div>
-<% } %>
+    <!-- Message Area -->
+    <% if(messages.length > 0) {%>
+        <div class="alert alert-danger">
+            <%= messages %>
+        </div>
+    <% } %>
 <div class="row">
     <form method=""POST" autocomplete=""off">
         <fieldset class="form-group">
