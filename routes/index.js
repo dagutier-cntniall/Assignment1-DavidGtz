@@ -122,12 +122,10 @@ router.post('/login', function(req, res, next) {
         displayName : user.displayName,
         username : user.username,
         email : user.email
-      }
-    })
-
-    return res.redirect('/');
+      };
+      return res.redirect('/contact_list');
+    });
   })
-  
 });
 
 /* GET registration page. */
@@ -175,9 +173,10 @@ router.post('/register', function(req, res, next) {
 });
 
 /*GET Route for logout */
-router.get('/register', function(req, res, next) {
-  req.logout();
-  res.redirect('/');
+router.get('/logout', function(req, res, next) {
+  req.session.destroy(function(err) {
+    res.redirect('/');
+  });
 });
 
 module.exports = router;
